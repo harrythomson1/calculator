@@ -76,8 +76,8 @@ document.querySelector("#num0").addEventListener("click", function() {
     displayValue = document.querySelector("#display").innerHTML})
 document.querySelector("#clear").addEventListener("click", function() {
     document.querySelector("#display").innerHTML = ""
-    displayValue = 0
-    firstNum = 0})
+    displayValue = ""
+    firstNum = ""})
 document.querySelector("#divide").addEventListener("click", function() {
     operator = "/"
     firstNum = displayValue
