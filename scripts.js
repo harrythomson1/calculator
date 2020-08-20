@@ -1,20 +1,31 @@
 //Calculator functionality
 function add(num1, num2) {
-    num1 = parseInt(num1, 10)
-    num2 = parseInt(num2, 10)
+    num1 = parseFloat(num1, 10)
+    num2 = parseFloat(num2, 10)
     return num1 + num2
 }
 
 function subtract(num1, num2) {
+    num1 = parseFloat(num1, 10)
+    num2 = parseFloat(num2, 10)
     return num1 - num2
 }
 
 function multiply(num1, num2) {
+    num1 = parseFloat(num1, 10)
+    num2 = parseFloat(num2, 10)
     return num1 * num2
 }
 
 function divide(num1, num2) {
-    return num1 / num2
+    if (num2 == 0) {
+        return "You cannot divide by 0"
+    }
+    else {
+        num1 = parseFloat(num1, 10)
+        num2 = parseFloat(num2, 10)
+        return num1 / num2
+    }
 }
 
 function operate(operator, num1, num2) {
@@ -32,70 +43,231 @@ function operate(operator, num1, num2) {
     }
 }
 
-//Calculator display and function to update it
+// Tracking variables
 let displayValue = ""
-function updateDisplayValue() {
-    displayValue = document.querySelector("#display").innerHTML
-}
-
 let firstNum = ""
 let operator = ""
+let result = ""
 
-// Button functionality
-// I hate this and it NEEDS to be improved.
-// Maybe loop backwards through the forEach. Start at the last buttons and end at the first?
-document.querySelector("#num1").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 1
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num2").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 2 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num3").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 3 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num4").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 4 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num5").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 5 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num6").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 6 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num7").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 7 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num8").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 8 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num9").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 9 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#num0").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML += 0 
-    displayValue = document.querySelector("#display").innerHTML})
-document.querySelector("#clear").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML = ""
-    displayValue = ""
-    firstNum = ""})
-document.querySelector("#divide").addEventListener("click", function() {
-    operator = "/"
-    firstNum = displayValue
-    document.querySelector("#display").innerHTML = ""})
-document.querySelector("#multiply").addEventListener("click", function() {
-    operator = "*"
-    firstNum = displayValue
-    document.querySelector("#display").innerHTML = ""})
-document.querySelector("#add").addEventListener("click", function() {
-    operator = "+"
-    firstNum = displayValue
-    document.querySelector("#display").innerHTML = ""})
-document.querySelector("#subtract").addEventListener("click", function() {
-    operator = "-"
-    firstNum = displayValue
-    document.querySelector("#display").innerHTML = ""})
-document.querySelector("#equals").addEventListener("click", function() {
-    document.querySelector("#display").innerHTML = operate(operator, firstNum, displayValue)
-    displayValue = document.querySelector("#display").innerHTML
+// Function to check for a keypress
+window.addEventListener("keydown", checkKeyPress, false);
+
+
+
+// Keyboard functionality. There has to be a better way to write this!
+function checkKeyPress(key){
+        if (key.keyCode == "97" || key.keyCode == "49") {
+            result = ""
+            document.querySelector("#display").innerHTML += 1
+            displayValue += "1"
+        }
+        else if (key.keyCode == "98" || key.keyCode == "50") {
+            result = ""
+            document.querySelector("#display").innerHTML += 2
+            displayValue += "2"
+        }
+        else if (key.keyCode == "99" || key.keyCode == "51") {
+            result = ""
+            document.querySelector("#display").innerHTML += 3
+            displayValue += "3"
+        }
+        else if (key.keyCode == "100" || key.keyCode == "52") {
+            result = ""
+            document.querySelector("#display").innerHTML += 4
+            displayValue += "4"
+        }
+        else if (key.keyCode == "101" || key.keyCode == "53") {
+            result = ""
+            document.querySelector("#display").innerHTML += 5
+            displayValue += "5"
+        }
+        else if (key.keyCode == "102" || key.keyCode == "54") {
+            result = ""
+            document.querySelector("#display").innerHTML += 6
+            displayValue += "6"
+        }
+        else if (key.keyCode == "103" || key.keyCode == "55") {
+            result = ""
+            document.querySelector("#display").innerHTML += 7
+            displayValue += "7"
+        }
+        else if (key.keyCode == "104" || key.keyCode == "56") {
+            result = ""
+            document.querySelector("#display").innerHTML += 8
+            displayValue += "8"
+        }
+        else if (key.keyCode == "105" || key.keyCode == "57") {
+            result = ""
+            document.querySelector("#display").innerHTML += 9
+            displayValue += "9"
+        }
+        else if (key.keyCode == "96" || key.keyCode == "48") {
+            if (document.querySelector("#display").innerHTML != 0) {
+                result = ""
+                document.querySelector("#display").innerHTML += 0
+                displayValue += "0"
+            }
+        }
+        else if (key.keyCode == "110" || key.keyCode == "190") {
+                if (!displayValue.includes(".")) {
+                    result = ""
+                    document.querySelector("#display").innerHTML += "."
+                    displayValue += "."
+                }
+        }
+        else if (key.keyCode == "46") {
+            document.querySelector("#displayResult").innerHTML = ""
+            document.querySelector("#display").innerHTML = ""
+            displayValue = ""
+            firstNum = ""
+            operator = ""
+            result = ""
+        }
+        else if (key.keyCode == "8") {
+            document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
+            displayValue = document.querySelector("#display").innerHTML
+        }
+        else if (key.keyCode == "111" || key.keyCode == "191") {
+            operator = "/"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "/"
+            displayValue = ""
+        }
+        else if (key.keyCode == "106") {
+            operator = "*"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "*"
+            displayValue = ""
+        }
+        else if (key.keyCode == "107") {
+            operator = "+"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "+"
+            displayValue = ""
+        }
+        else if (key.keyCode == "109" || key.keyCode == "189") {
+            operator = "-"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "-"
+            displayValue = ""
+        }
+        else if (key.keyCode == "13" || key.keyCode == "187") {
+            if (result == "") {
+                result = operate(operator, firstNum, displayValue)
+                document.querySelector("#displayResult").innerHTML = `= ${result}`
+                displayValue = result 
+                document.querySelector("#display").innerHTML = ""
+            }
+        }
+    }
+
+
+//Click button functionality. This is almost identical to the keyboard functionality.
+//I believe both of these could be trimmed by a lot.
+document.querySelectorAll(".btn").forEach(element => {
+    element.addEventListener("click", event => {
+        if (element.innerHTML == 1) {
+            result = ""
+            document.querySelector("#display").innerHTML += 1
+            displayValue += "1"
+        }
+        else if (element.innerHTML == 2) {
+            result = ""
+            document.querySelector("#display").innerHTML += 2
+            displayValue += "2"
+        }
+        else if (element.innerHTML == 3) {
+            result = ""
+            document.querySelector("#display").innerHTML += 3
+            displayValue += "3"
+        }
+        else if (element.innerHTML == 4) {
+            result = ""
+            document.querySelector("#display").innerHTML += 4
+            displayValue += "4"
+        }
+        else if (element.innerHTML == 5) {
+            result = ""
+            document.querySelector("#display").innerHTML += 5
+            displayValue += "5"
+        }
+        else if (element.innerHTML == 6) {
+            result = ""
+            document.querySelector("#display").innerHTML += 6
+            displayValue += "6"
+        }
+        else if (element.innerHTML == 7) {
+            result = ""
+            document.querySelector("#display").innerHTML += 7
+            displayValue += "7"
+        }
+        else if (element.innerHTML == 8) {
+            result = ""
+            document.querySelector("#display").innerHTML += 8
+            displayValue += "8"
+        }
+        else if (element.innerHTML == 9) {
+            result = ""
+            document.querySelector("#display").innerHTML += 9
+            displayValue += "9"
+        }
+        else if (element.innerHTML == 0) {
+            if (document.querySelector("#display").innerHTML != 0) {
+                result = ""
+                document.querySelector("#display").innerHTML += 0
+                displayValue += "0"
+            }
+        }
+        else if (element.innerHTML == ".") {
+                if (!displayValue.includes(".")) {
+                    result = ""
+                    document.querySelector("#display").innerHTML += "."
+                    displayValue += "."
+                }
+        }
+        else if (element.innerHTML == "Clear") {
+            document.querySelector("#displayResult").innerHTML = ""
+            document.querySelector("#display").innerHTML = ""
+            displayValue = ""
+            firstNum = ""
+            operator = ""
+            result = ""
+        }
+        else if (element.innerHTML == "Back") {
+            document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
+            displayValue = document.querySelector("#display").innerHTML
+        }
+        else if (element.innerHTML == "/") {
+            operator = "/"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "/"
+            displayValue = ""
+        }
+        else if (element.innerHTML == "*") {
+            operator = "*"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "*"
+            displayValue = ""
+        }
+        else if (element.innerHTML == "+") {
+            operator = "+"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "+"
+            displayValue = ""
+        }
+        else if (element.innerHTML == "-") {
+            operator = "-"
+            firstNum = displayValue
+            document.querySelector("#display").innerHTML += "-"
+            displayValue = ""
+        }
+        else if (element.innerHTML == "=") {
+            if (result == "") {
+                result = operate(operator, firstNum, displayValue)
+                document.querySelector("#displayResult").innerHTML = `= ${result}`
+                displayValue = result 
+                document.querySelector("#display").innerHTML = ""
+            }
+        }
     })
-
+})

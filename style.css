@@ -2,6 +2,10 @@
     height: 18px;
 }
 
+#displayResult {
+    height: 18px;
+}
+
 .calculator {
     display: flex;
     justify-content: center;
