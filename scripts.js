@@ -29,7 +29,16 @@ function divide(num1, num2) {
 }
 
 function operate(operator, num1, num2) {
-    if (operator == "+") {
+    if (num1 == "" || num1 == undefined) {
+        return num2
+    }
+    else if (num2 == "" || num2 == undefined) {
+        return num1
+    }
+    else if (operator == "") {
+        return num2
+    }
+    else if (operator == "+") {
         return add(num1, num2)
     }
     else if (operator == "-") {
@@ -48,6 +57,7 @@ let displayValue = ""
 let firstNum = ""
 let operator = ""
 let result = ""
+let storedResult = ""
 
 // Function to check for a keypress
 window.addEventListener("keydown", checkKeyPress, false);
@@ -122,41 +132,62 @@ function checkKeyPress(key){
             firstNum = ""
             operator = ""
             result = ""
+            storedResult = ""
         }
         else if (key.keyCode == "8") {
             document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
             displayValue = document.querySelector("#display").innerHTML
         }
         else if (key.keyCode == "111" || key.keyCode == "191") {
-            operator = "/"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "/"
-            displayValue = ""
+            if (operator == "") {
+                operator = "/"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "/"
+                displayValue = ""
+            }
         }
         else if (key.keyCode == "106") {
-            operator = "*"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "*"
-            displayValue = ""
+            if (operator == "") { 
+                operator = "*"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "*"
+                displayValue = ""
+            }
         }
         else if (key.keyCode == "107") {
-            operator = "+"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "+"
-            displayValue = ""
+            if (operator == "") {
+                operator = "+"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "+"
+                displayValue = ""
+            }
         }
         else if (key.keyCode == "109" || key.keyCode == "189") {
-            operator = "-"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "-"
-            displayValue = ""
+            if (operator == "") {
+                operator = "-"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "-"
+                displayValue = ""
+            }
         }
         else if (key.keyCode == "13" || key.keyCode == "187") {
-            if (result == "") {
+            if (storedResult == "") {
                 result = operate(operator, firstNum, displayValue)
                 document.querySelector("#displayResult").innerHTML = `= ${result}`
-                displayValue = result 
                 document.querySelector("#display").innerHTML = ""
+                operator = ""
+                storedResult = result
+                result = ""
+                displayValue = ""
+            }
+            else if (result == "") {
+                result = operate(operator, storedResult, displayValue)
+                document.querySelector("#displayResult").innerHTML = `= ${result}`
+                document.querySelector("#display").innerHTML = ""
+                operator = ""
+                storedResult = result
+                result = ""
+                displayValue = ""
             }
         }
     }
@@ -167,60 +198,49 @@ function checkKeyPress(key){
 document.querySelectorAll(".btn").forEach(element => {
     element.addEventListener("click", event => {
         if (element.innerHTML == 1) {
-            result = ""
             document.querySelector("#display").innerHTML += 1
             displayValue += "1"
         }
         else if (element.innerHTML == 2) {
-            result = ""
             document.querySelector("#display").innerHTML += 2
             displayValue += "2"
         }
         else if (element.innerHTML == 3) {
-            result = ""
             document.querySelector("#display").innerHTML += 3
             displayValue += "3"
         }
         else if (element.innerHTML == 4) {
-            result = ""
             document.querySelector("#display").innerHTML += 4
             displayValue += "4"
         }
         else if (element.innerHTML == 5) {
-            result = ""
             document.querySelector("#display").innerHTML += 5
             displayValue += "5"
         }
         else if (element.innerHTML == 6) {
-            result = ""
             document.querySelector("#display").innerHTML += 6
             displayValue += "6"
         }
         else if (element.innerHTML == 7) {
-            result = ""
             document.querySelector("#display").innerHTML += 7
             displayValue += "7"
         }
         else if (element.innerHTML == 8) {
-            result = ""
             document.querySelector("#display").innerHTML += 8
             displayValue += "8"
         }
         else if (element.innerHTML == 9) {
-            result = ""
             document.querySelector("#display").innerHTML += 9
             displayValue += "9"
         }
         else if (element.innerHTML == 0) {
             if (document.querySelector("#display").innerHTML != 0) {
-                result = ""
                 document.querySelector("#display").innerHTML += 0
                 displayValue += "0"
             }
         }
         else if (element.innerHTML == ".") {
                 if (!displayValue.includes(".")) {
-                    result = ""
                     document.querySelector("#display").innerHTML += "."
                     displayValue += "."
                 }
@@ -232,41 +252,62 @@ document.querySelectorAll(".btn").forEach(element => {
             firstNum = ""
             operator = ""
             result = ""
+            storedResult = ""
         }
         else if (element.innerHTML == "Back") {
             document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
             displayValue = document.querySelector("#display").innerHTML
         }
         else if (element.innerHTML == "/") {
-            operator = "/"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "/"
-            displayValue = ""
+            if (operator == "") {
+                operator = "/"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "/"
+                displayValue = ""
+            }
         }
         else if (element.innerHTML == "*") {
-            operator = "*"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "*"
-            displayValue = ""
+            if (operator == "") { 
+                operator = "*"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "*"
+                displayValue = ""
+            }
         }
         else if (element.innerHTML == "+") {
-            operator = "+"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "+"
-            displayValue = ""
+            if (operator == "") {
+                operator = "+"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "+"
+                displayValue = ""
+            }
         }
         else if (element.innerHTML == "-") {
-            operator = "-"
-            firstNum = displayValue
-            document.querySelector("#display").innerHTML += "-"
-            displayValue = ""
+            if (operator == "") {
+                operator = "-"
+                firstNum = displayValue
+                document.querySelector("#display").innerHTML += "-"
+                displayValue = ""
+            }
         }
         else if (element.innerHTML == "=") {
-            if (result == "") {
+            if (storedResult == "") {
                 result = operate(operator, firstNum, displayValue)
                 document.querySelector("#displayResult").innerHTML = `= ${result}`
-                displayValue = result 
                 document.querySelector("#display").innerHTML = ""
+                operator = ""
+                storedResult = result
+                result = ""
+                displayValue = ""
+            }
+            else if (result == "") {
+                result = operate(operator, storedResult, displayValue)
+                document.querySelector("#displayResult").innerHTML = `= ${result}`
+                document.querySelector("#display").innerHTML = ""
+                operator = ""
+                storedResult = result
+                result = ""
+                displayValue = ""
             }
         }
     })
