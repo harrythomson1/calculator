@@ -43,6 +43,7 @@ tbody {
     border-color: black;
     background-color: black;
     color: #ff8c00;
+    outline: none;
 }
 
 td {
