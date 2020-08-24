@@ -193,52 +193,14 @@ function checkKeyPress(key){
     }
 
 
-//Click button functionality. This is almost identical to the keyboard functionality.
+//On screen button functionality. This is almost identical to the keyboard functionality.
 //I believe both of these could be trimmed by a lot.
 document.querySelectorAll(".btn").forEach(element => {
     element.addEventListener("click", event => {
-        if (element.innerHTML == 1) {
-            document.querySelector("#display").innerHTML += 1
-            displayValue += "1"
-        }
-        else if (element.innerHTML == 2) {
-            document.querySelector("#display").innerHTML += 2
-            displayValue += "2"
-        }
-        else if (element.innerHTML == 3) {
-            document.querySelector("#display").innerHTML += 3
-            displayValue += "3"
-        }
-        else if (element.innerHTML == 4) {
-            document.querySelector("#display").innerHTML += 4
-            displayValue += "4"
-        }
-        else if (element.innerHTML == 5) {
-            document.querySelector("#display").innerHTML += 5
-            displayValue += "5"
-        }
-        else if (element.innerHTML == 6) {
-            document.querySelector("#display").innerHTML += 6
-            displayValue += "6"
-        }
-        else if (element.innerHTML == 7) {
-            document.querySelector("#display").innerHTML += 7
-            displayValue += "7"
-        }
-        else if (element.innerHTML == 8) {
-            document.querySelector("#display").innerHTML += 8
-            displayValue += "8"
-        }
-        else if (element.innerHTML == 9) {
-            document.querySelector("#display").innerHTML += 9
-            displayValue += "9"
-        }
-        else if (element.innerHTML == 0) {
-            if (document.querySelector("#display").innerHTML != 0) {
-                document.querySelector("#display").innerHTML += 0
-                displayValue += "0"
-            }
-        }
+        if (element.innerHTML >= 1 && element.innerHTML <= 9) {
+            document.querySelector("#display").innerHTML += element.innerHTML
+            displayValue += element.innerHTML
+         }
         else if (element.innerHTML == ".") {
                 if (!displayValue.includes(".")) {
                     document.querySelector("#display").innerHTML += "."
