@@ -67,63 +67,106 @@ window.addEventListener("keydown", checkKeyPress, false);
 // Keyboard functionality. There has to be a better way to write this!
 function checkKeyPress(key){
         if (key.keyCode == "97" || key.keyCode == "49") {
-            result = ""
-            document.querySelector("#display").innerHTML += 1
-            displayValue += "1"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 1
+                displayValue += "1"
+            }
         }
         else if (key.keyCode == "98" || key.keyCode == "50") {
-            result = ""
-            document.querySelector("#display").innerHTML += 2
-            displayValue += "2"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 2
+                displayValue += "2"
+            }
         }
         else if (key.keyCode == "99" || key.keyCode == "51") {
-            result = ""
-            document.querySelector("#display").innerHTML += 3
-            displayValue += "3"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 3
+                displayValue += "3"
+            }
         }
         else if (key.keyCode == "100" || key.keyCode == "52") {
-            result = ""
-            document.querySelector("#display").innerHTML += 4
-            displayValue += "4"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 4
+                displayValue += "4"
+            }
         }
         else if (key.keyCode == "101" || key.keyCode == "53") {
-            result = ""
-            document.querySelector("#display").innerHTML += 5
-            displayValue += "5"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 5
+                displayValue += "5"
+            }
         }
         else if (key.keyCode == "102" || key.keyCode == "54") {
-            result = ""
-            document.querySelector("#display").innerHTML += 6
-            displayValue += "6"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 6
+                displayValue += "6"
+            }
         }
         else if (key.keyCode == "103" || key.keyCode == "55") {
-            result = ""
-            document.querySelector("#display").innerHTML += 7
-            displayValue += "7"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 7
+                displayValue += "7"
+            }
         }
         else if (key.keyCode == "104" || key.keyCode == "56") {
-            result = ""
-            document.querySelector("#display").innerHTML += 8
-            displayValue += "8"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 8
+                displayValue += "8"
+            }
         }
         else if (key.keyCode == "105" || key.keyCode == "57") {
-            result = ""
-            document.querySelector("#display").innerHTML += 9
-            displayValue += "9"
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+                }
+            else {
+                document.querySelector("#display").innerHTML += 9
+                displayValue += "9"
+            }
         }
         else if (key.keyCode == "96" || key.keyCode == "48") {
             if (document.querySelector("#display").innerHTML != 0) {
-                result = ""
+                if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
                 document.querySelector("#display").innerHTML += 0
                 displayValue += "0"
+                }
             }
         }
         else if (key.keyCode == "110" || key.keyCode == "190") {
-                if (!displayValue.includes(".")) {
-                    result = ""
-                    document.querySelector("#display").innerHTML += "."
-                    displayValue += "."
-                }
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else if (!displayValue.includes(".")) {
+                result = ""
+                document.querySelector("#display").innerHTML += "."
+                displayValue += "."
+            }
         }
         else if (key.keyCode == "46") {
             document.querySelector("#displayResult").innerHTML = ""
@@ -198,14 +241,22 @@ function checkKeyPress(key){
 document.querySelectorAll(".btn").forEach(element => {
     element.addEventListener("click", event => {
         if (element.innerHTML >= 1 && element.innerHTML <= 9) {
-            document.querySelector("#display").innerHTML += element.innerHTML
-            displayValue += element.innerHTML
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += element.innerHTML
+                displayValue += element.innerHTML
+            }
          }
         else if (element.innerHTML == ".") {
-                if (!displayValue.includes(".")) {
-                    document.querySelector("#display").innerHTML += "."
-                    displayValue += "."
-                }
+            if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else if (!displayValue.includes(".")) {
+                document.querySelector("#display").innerHTML += "."
+                displayValue += "."
+            }
         }
         else if (element.innerHTML == "Clear") {
             document.querySelector("#displayResult").innerHTML = ""
