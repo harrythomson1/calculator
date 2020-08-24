@@ -148,7 +148,7 @@ function checkKeyPress(key){
             }
         }
         else if (key.keyCode == "96" || key.keyCode == "48") {
-            if (document.querySelector("#display").innerHTML != 0) {
+            if (displayValue != "") {
                 if (storedResult != "" && operator == "") {
                 displayValue = ""
             }
@@ -248,7 +248,18 @@ document.querySelectorAll(".btn").forEach(element => {
                 document.querySelector("#display").innerHTML += element.innerHTML
                 displayValue += element.innerHTML
             }
-         }
+        }
+        else if (element.innerHTML == 0) {
+            if (displayValue != "") {
+                if (storedResult != "" && operator == "") {
+                displayValue = ""
+            }
+            else {
+                document.querySelector("#display").innerHTML += 0
+                displayValue += "0"
+                }
+            }
+        }
         else if (element.innerHTML == ".") {
             if (storedResult != "" && operator == "") {
                 displayValue = ""
