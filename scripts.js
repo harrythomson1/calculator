@@ -182,7 +182,7 @@ function checkKeyPress(key){
             displayValue = document.querySelector("#display").innerHTML
         }
         else if (key.keyCode == "111" || key.keyCode == "191") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "/"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "/"
@@ -190,7 +190,7 @@ function checkKeyPress(key){
             }
         }
         else if (key.keyCode == "106") {
-            if (operator == "") { 
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) { 
                 operator = "*"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "*"
@@ -198,7 +198,7 @@ function checkKeyPress(key){
             }
         }
         else if (key.keyCode == "107") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "+"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "+"
@@ -206,7 +206,7 @@ function checkKeyPress(key){
             }
         }
         else if (key.keyCode == "109" || key.keyCode == "189") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "-"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "-"
@@ -283,7 +283,7 @@ document.querySelectorAll(".btn").forEach(element => {
             displayValue = document.querySelector("#display").innerHTML
         }
         else if (element.innerHTML == "/") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "/"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "/"
@@ -291,7 +291,7 @@ document.querySelectorAll(".btn").forEach(element => {
             }
         }
         else if (element.innerHTML == "*") {
-            if (operator == "") { 
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) { 
                 operator = "*"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "*"
@@ -299,7 +299,7 @@ document.querySelectorAll(".btn").forEach(element => {
             }
         }
         else if (element.innerHTML == "+") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "+"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "+"
@@ -307,7 +307,7 @@ document.querySelectorAll(".btn").forEach(element => {
             }
         }
         else if (element.innerHTML == "-") {
-            if (operator == "") {
+            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
                 operator = "-"
                 firstNum = displayValue
                 document.querySelector("#display").innerHTML += "-"
