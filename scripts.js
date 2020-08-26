@@ -59,8 +59,120 @@ let operator = ""
 let result = ""
 let storedResult = ""
 
-// Function to check for a keypress
-window.addEventListener("keydown", checkKeyPress, false);
+if (typeof(window) != 'undefined') {
+    // Do stuff when running in browser
+    // Function to check for a keypress
+    window.addEventListener("keydown", checkKeyPress, false);
+
+    //On screen button functionality. This is almost identical to the keyboard functionality.
+    //I believe both of these could be trimmed by a lot.
+    document.querySelectorAll(".btn").forEach(element => {
+        element.addEventListener("click", event => {
+            if (element.innerHTML >= 1 && element.innerHTML <= 9) {
+                if (storedResult != "" && operator == "") {
+                    displayValue = ""
+                }
+                else {
+                    document.querySelector("#display").innerHTML += element.innerHTML
+                    displayValue += element.innerHTML
+                }
+            }
+            else if (element.innerHTML == 0) {
+                if (displayValue != "") {
+                    if (storedResult != "" && operator == "") {
+                    displayValue = ""
+                }
+                else {
+                    document.querySelector("#display").innerHTML += 0
+                    displayValue += "0"
+                    }
+                }
+            }
+            else if (element.innerHTML == ".") {
+                if (storedResult != "" && operator == "") {
+                    displayValue = ""
+                }
+                else if (!displayValue.includes(".")) {
+                    document.querySelector("#display").innerHTML += "."
+                    displayValue += "."
+                }
+            }
+            else if (element.innerHTML == "Clear") {
+                document.querySelector("#displayResult").innerHTML = ""
+                document.querySelector("#display").innerHTML = ""
+                displayValue = ""
+                firstNum = ""
+                operator = ""
+                result = ""
+                storedResult = ""
+            }
+            else if (element.innerHTML == "Back") {
+                document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
+                displayValue = document.querySelector("#display").innerHTML
+            }
+            else if (element.innerHTML == "/") {
+                if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
+                    operator = "/"
+                    firstNum = displayValue
+                    document.querySelector("#display").innerHTML += "/"
+                    displayValue = ""
+                }
+            }
+            else if (element.innerHTML == "*") {
+                if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) { 
+                    operator = "*"
+                    firstNum = displayValue
+                    document.querySelector("#display").innerHTML += "*"
+                    displayValue = ""
+                }
+            }
+            else if (element.innerHTML == "+") {
+                if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
+                    operator = "+"
+                    firstNum = displayValue
+                    document.querySelector("#display").innerHTML += "+"
+                    displayValue = ""
+                }
+            }
+            else if (element.innerHTML == "-") {
+                if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
+                    operator = "-"
+                    firstNum = displayValue
+                    document.querySelector("#display").innerHTML += "-"
+                    displayValue = ""
+                }
+            }
+            else if (element.innerHTML == "=") {
+                if (storedResult == "") {
+                    result = operate(operator, firstNum, displayValue)
+                    document.querySelector("#displayResult").innerHTML = `= ${result}`
+                    document.querySelector("#display").innerHTML = ""
+                    operator = ""
+                    storedResult = result
+                    result = ""
+                    displayValue = ""
+                }
+                else if (result == "") {
+                    result = operate(operator, storedResult, displayValue)
+                    document.querySelector("#displayResult").innerHTML = `= ${result}`
+                    document.querySelector("#display").innerHTML = ""
+                    operator = ""
+                    storedResult = result
+                    result = ""
+                    displayValue = ""
+                }
+            }
+        })
+    })
+} else {
+    // Do stuff when testing locally
+    module.exports = {
+        add: add,
+        subtract: subtract,
+        multiply: multiply,
+        divide: divide
+    }
+}
 
 
 
@@ -236,103 +348,3 @@ function checkKeyPress(key){
     }
 
 
-//On screen button functionality. This is almost identical to the keyboard functionality.
-//I believe both of these could be trimmed by a lot.
-document.querySelectorAll(".btn").forEach(element => {
-    element.addEventListener("click", event => {
-        if (element.innerHTML >= 1 && element.innerHTML <= 9) {
-            if (storedResult != "" && operator == "") {
-                displayValue = ""
-            }
-            else {
-                document.querySelector("#display").innerHTML += element.innerHTML
-                displayValue += element.innerHTML
-            }
-        }
-        else if (element.innerHTML == 0) {
-            if (displayValue != "") {
-                if (storedResult != "" && operator == "") {
-                displayValue = ""
-            }
-            else {
-                document.querySelector("#display").innerHTML += 0
-                displayValue += "0"
-                }
-            }
-        }
-        else if (element.innerHTML == ".") {
-            if (storedResult != "" && operator == "") {
-                displayValue = ""
-            }
-            else if (!displayValue.includes(".")) {
-                document.querySelector("#display").innerHTML += "."
-                displayValue += "."
-            }
-        }
-        else if (element.innerHTML == "Clear") {
-            document.querySelector("#displayResult").innerHTML = ""
-            document.querySelector("#display").innerHTML = ""
-            displayValue = ""
-            firstNum = ""
-            operator = ""
-            result = ""
-            storedResult = ""
-        }
-        else if (element.innerHTML == "Back") {
-            document.querySelector("#display").innerHTML = document.querySelector("#display").innerHTML.slice(0, -1)
-            displayValue = document.querySelector("#display").innerHTML
-        }
-        else if (element.innerHTML == "/") {
-            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
-                operator = "/"
-                firstNum = displayValue
-                document.querySelector("#display").innerHTML += "/"
-                displayValue = ""
-            }
-        }
-        else if (element.innerHTML == "*") {
-            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) { 
-                operator = "*"
-                firstNum = displayValue
-                document.querySelector("#display").innerHTML += "*"
-                displayValue = ""
-            }
-        }
-        else if (element.innerHTML == "+") {
-            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
-                operator = "+"
-                firstNum = displayValue
-                document.querySelector("#display").innerHTML += "+"
-                displayValue = ""
-            }
-        }
-        else if (element.innerHTML == "-") {
-            if (!(/[+*\/-]/g).test(document.querySelector("#display").innerHTML)) {
-                operator = "-"
-                firstNum = displayValue
-                document.querySelector("#display").innerHTML += "-"
-                displayValue = ""
-            }
-        }
-        else if (element.innerHTML == "=") {
-            if (storedResult == "") {
-                result = operate(operator, firstNum, displayValue)
-                document.querySelector("#displayResult").innerHTML = `= ${result}`
-                document.querySelector("#display").innerHTML = ""
-                operator = ""
-                storedResult = result
-                result = ""
-                displayValue = ""
-            }
-            else if (result == "") {
-                result = operate(operator, storedResult, displayValue)
-                document.querySelector("#displayResult").innerHTML = `= ${result}`
-                document.querySelector("#display").innerHTML = ""
-                operator = ""
-                storedResult = result
-                result = ""
-                displayValue = ""
-            }
-        }
-    })
-})
